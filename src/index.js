@@ -10,9 +10,14 @@ import {Main} from './divination/main';
 
 import './index.scss';
 
+// ReactDOM.render(
+//   <Main/>,
+//   document.getElementById('root')
+// );
+
 ReactDOM.render(
   <Router history={browserHistory}>
-    <Route path="/" component={Main}/>
+    <Route path="/Divination" component={Main}/>
   </Router>,
   document.getElementById('root')
 );

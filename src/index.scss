@@ -163,3 +163,15 @@ $guaChangeWidth:10%;
   @extend .gua-change;
   *background-color: green;
 }
+
+.guide {
+  text-align: left;
+  margin: 4em;
+}
+
+.gua-result {
+  border: 2px black solid;
+  max-width: 20em;
+  margin-left: auto;
+  margin-right: auto;
+}

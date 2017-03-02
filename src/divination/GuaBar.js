@@ -3,10 +3,17 @@ import React, {Component} from 'react';
 export class GuaBar extends Component {
   render() {
     const self = this;
-    const isYang = ((self.props.gua % 2) === 1);
-    const isChange = (self.props.gua > 1);
 
     const guaLineClass = 'gua-line';
+    if (self.props.gua === -1) {
+      return (
+        <div className={guaLineClass}/>
+      );
+    }
+
+    const isYang = (self.props.gua > 1);
+    const isChange = ((self.props.gua === 0) || (self.props.gua === 3));
+
     let guaBarClass = 'gua-bar-yin';
     let guaSpaceClass = 'gua-space-yin';
     if (isYang) {

@@ -9,7 +9,9 @@ export class Coin extends Component {
 
   handleTransitionEnd(e) {
     const self = this;
-    self.props.enableFlip();
+    if (self.props.enableFlip) {
+      self.props.enableFlip();
+    }
     // console.log(self.props.aaa);
     // console.log('handleTransitionEnd: ' + e);
     e.stopPropagation();
