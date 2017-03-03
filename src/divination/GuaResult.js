@@ -10,10 +10,10 @@ export class GuaResult extends Component {
       change = '变卦:' + self.props.change;
     }
 
-    const link = 'https://www.baidu.com/s?wd=site:(baike.fututa.com) title:(' + self.props.desc + '_' + self.props.desc2 + ')';
+    const link = 'https://www.baidu.com/s?wd=title:(周易第' + self.props.index + '卦_' + self.props.name + '卦_' + self.props.name2 + '_' + self.props.desc + '_' + self.props.desc2 + ')';
     return (
       <div className="gua-result">
-        卦象: {self.props.desc}, {change}
+        结果: 第{self.props.index}卦 {self.props.name}卦({self.props.name2}) , {change}
         <br/>
         <br/>
         <a href={link} target="_blank" rel="noopener noreferrer">点此查找解释</a>

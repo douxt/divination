@@ -4,9 +4,17 @@ import {Coin} from './coin';
 import {GuaDiagram} from './GuaDiagram';
 import {GuaResult} from './GuaResult';
 import {Guide} from './Guide';
+// import {GuaList} from './GuaList';
 // import {Cheerio} from 'cheerio';
 
+// 六十四卦列表
+const guaList = require('./GuaList');
+
+// 上下指标对应的卦指标
+const guaMap = require('./GuaMap');
+
 const guaDict = ['坤', '震', '坎', '兑', '艮', '离', '巽', '乾'];
+const guaDict2 = ['地', '雷', '水', '泽', '山', '火', '风', '天'];
 
 export class Divination extends Component {
   constructor(props) {
@@ -15,7 +23,7 @@ export class Divination extends Component {
     this.onTransitionEnd = this.onTransitionEnd.bind(this);
 
     this.setting = {
-      flipDeg: 7200
+      flipDeg: 4320
     };
 
     this.state = {
@@ -23,7 +31,7 @@ export class Divination extends Component {
       flipDisabled: '',
       guas: []
     };
-    console.log('this: ' + this);
+    // console.log('guaList: ' + guaList);
 
     // const self = this;
     // self.testCheerio();
@@ -73,9 +81,23 @@ export class Divination extends Component {
       }
     });
     console.log('change guas: ' + changeGuas);
+
+// 卦的结果： 第X卦 X卦 XX卦 上X下X X上X下
+
     // 计算卦的索引，111对应乾卦。000对应坤卦，索引转为10进制。
     const upGuaIndex = (guas[5] > 1 ? 4 : 0) + (guas[4] > 1 ? 2 : 0) + (guas[3] > 1 ? 1 : 0);
     const downGuaIndex = (guas[2] > 1 ? 4 : 0) + (guas[1] > 1 ? 2 : 0) + (guas[0] > 1 ? 1 : 0);
+
+    const guaIndex = guaMap[upGuaIndex][downGuaIndex];
+    const guaName = guaList[guaIndex - 1];
+
+    let guaName2 = null;
+    if (upGuaIndex === downGuaIndex) {
+      // 上下卦相同，格式为X为X
+      guaName2 = guaDict[upGuaIndex] + '为' + guaDict2[upGuaIndex];
+    } else {
+      guaName2 = guaDict2[upGuaIndex] + guaDict2[downGuaIndex] + guaName;
+    }
 
     console.log('upGuaIndex: ' + upGuaIndex + ', downGuaIndex: ' + downGuaIndex);
 
@@ -84,6 +106,9 @@ export class Divination extends Component {
     console.log(guaDiscription + ' 变卦: ' + changeGuas);
     // https://www.baidu.com/s?wd=X上X下 site:baike.fututa.com
     return {
+      index: guaIndex,
+      name: guaName,
+      name2: guaName2,
       gua: guaDiscription,
       gua2: guaDiscription2,
       change: changeGuas
@@ -145,7 +170,7 @@ export class Divination extends Component {
     const guaResult = self.getResult();
     if (guaResult) {
       console.log('guaResult: ' + guaResult.guaDiscription);
-      result = <GuaResult desc={guaResult.gua} desc2={guaResult.gua2} change={guaResult.change}/>;
+      result = <GuaResult index={guaResult.index} name={guaResult.name} name2={guaResult.name2} desc={guaResult.gua} desc2={guaResult.gua2} change={guaResult.change}/>;
     }
 
     // const disabled = '';
