@@ -5,9 +5,9 @@ export class GuaResult extends Component {
     const self = this;
     let change = null;
     if (self.props.change.length === 0) {
-      change = '无变卦';
+      change = '无变爻';
     } else {
-      change = '变卦:' + self.props.change;
+      change = '变爻:' + self.props.change;
     }
 
     const link = 'https://www.baidu.com/s?wd=title:(周易第' + self.props.index + '卦_' + self.props.name + '卦_' + self.props.name2 + '_' + self.props.desc + '_' + self.props.desc2 + ')';
